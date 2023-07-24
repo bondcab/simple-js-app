@@ -1,4 +1,7 @@
+/* stylelint-disable */
 
+let favouriteFood = 'chocolate';
 
-let myName = 'Bob';
-document.write(myName);
+document.write(favouriteFood);
+
+alert('Hello world');
