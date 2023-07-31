@@ -1,54 +1,70 @@
-
-let pokemonList = (
-    [pokemon1,pokemon2,pokemon3,pokemon4,pokemon5,pokemon6,pokemon7]
-);
-
-
-let pokemon1 = {
+let pokemonList = [
+    {
     name: "Bulbasaur",
     height: 2.04,
-    types: [grass, poison]
+    types: ['grass', 'poison']
 
-}
+},
 
-let pokemon2 = {
+{
     name: "Charmander",
     height: 2,
-    types: [fire]
+    types: ['fire']
 
-}
+},
 
-let pokemon3 = {
+   {
     name: "Squirtle",
     height: 1.08,
-    types:  [water]
+    types:  ['water']
 
-}
+},
 
-let pokemon4 = {
+    {
     name: "Pidgey",
     height: 1,
-    types: [normal, flying]
+    types: ['normal', 'flying']
 
-}
+},
 
-let pokemon5 = {
+    {
     name: "Rattata",
     height: 1,
-    types: [normal]
+    types: ['normal']
 
-}
+},
 
-let pokemon6 = {
+{
     name: "Pikachu",
     height: 1.04,
-    types: [electric]
+    types: ['electric']
 
-}
-
-let pokemon7 = {
-    name: "Kigglypuff",
+},
+{
+    name: "Jigglypuff",
     height: 1.08,
-    types: [normal, fairy]
+    types: ['normal', 'fairy']
 
+},
+   
+];
+
+//for loop which lists out the name and height of each pokemon
+for (let i = 0; i <= pokemonList.length; i++){
+
+document.write(pokemonList[i].name + " (" + pokemonList[i].height + ") ")
+
+if (pokemonList[i].height >= 2){
+    document.write(" - Wow, thats big! ")
 }
+
+};
+
+
+
+
+
+
+
+
+
