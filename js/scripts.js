@@ -52,10 +52,12 @@ let pokemonList = [
 //for loop which lists out the name and height of each pokemon
 for (let i = 0; i <= pokemonList.length; i++){
 
-document.write(pokemonList[i].name + " (" + pokemonList[i].height + ") ")
+document.write(
+    ("<p>" + pokemonList[i].name) + "</p>" + " Height: " + (pokemonList[i].height)
+)
 
 if (pokemonList[i].height >= 2){
-    document.write(" - Wow, thats big! ")
+    document.write(" - Wow, thats big!" )
 }
 
 };
