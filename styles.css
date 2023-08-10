@@ -1,0 +1,58 @@
+
+/* May re-add style later  */
+/* body.body-style {
+    position: relative;
+    top: 100px;
+    display: block;
+    margin: auto;
+    padding-left: 25%;
+    
+
+} */
+
+.heading {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%);
+    width: 150px;
+}
+
+.button-class {
+    background-color: white;
+    margin:5px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    color: black;
+    font-size: 16px;
+    border: 2px solid black;
+    width: 130px;
+    left: 50%;
+    transform: translate(-54%);
+    border-radius: 8px;
+ 
+
+}
+
+.pokemon-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display:block;
+    background-color: white;
+    width: 150px;
+   
+   
+}
+
+.heading-pokemon-list {
+    position:absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
