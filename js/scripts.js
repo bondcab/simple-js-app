@@ -1,11 +1,10 @@
-
 //Pokemon Pokedex code
 
 //Code for the pokemon list inside an IIFE
 let pokemonRepository = (function () {
   let pokemonList = [];
 
-  //api where pokemon data is being retrieved from 
+  //api where pokemon data is being retrieved from
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   //function returns the pokemonList above shows as an empty array
@@ -13,10 +12,9 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
-  //conditional rule, if the pokemonType from the array is an object add it to the pokemonList array 
+  //conditional rule, if the pokemonType from the array is an object add it to the pokemonList array
   function add(pokemon) {
     if (typeof pokemon === "object") {
-
       return pokemonList.push(pokemon);
     }
   }
@@ -26,7 +24,10 @@ let pokemonRepository = (function () {
     let listPokemon = document.querySelector(".pokemon-list");
     let listItem = document.createElement("li");
     let button = document.createElement("button");
-    button.innerText = pokemon.name;
+    let pokemonName = pokemon.name;
+    pokemonName = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+
+    button.innerText = pokemonName;
     //Bootstrap attributes added below to toggle the modal
     button.classList.add("button-class", "btn", "btn-primary");
     button.setAttribute("data-toggle", "modal");
@@ -34,7 +35,7 @@ let pokemonRepository = (function () {
     button.setAttribute("data-target", "#exampleModal");
 
     //Bootstrap list-group-item added to li
-    listItem.setAttribute("class", "list-group-item")
+    listItem.setAttribute("class", "list-group-item");
 
     listItem.appendChild(button);
     listPokemon.appendChild(listItem);
@@ -42,47 +43,33 @@ let pokemonRepository = (function () {
     //event listener checking for button to be clicked then running the showDetails function below
     button.addEventListener("click", function (event) {
       showDetails(pokemon);
-
     });
   }
-
-  //function to find pokemon by name from the search bar
-  function findPokemonByName(searchText) {
-    for (let pokemon of pokemonList) {
-      if (pokemon.name.toLowerCase() === searchText.toLowerCase()) {
-        return pokemon;
-      }
-    }
-    return null;
-  }
-
-  // code to open modal if search text matches 
-  function searchOpenModal() {
-    let submitButton = document.querySelector('.btn-outline-success');
-
-    submitButton.addEventListener("click", function (event) {
-      let searchText = document.querySelector('.form-control').value;
-      let matchedPokemon = pokemonRepository.findPokemonByName(searchText);
-      if (matchedPokemon) {
-        showDetails(matchedPokemon);
-      }
-
-    })
-
-
-  }
-
-
-  
-
 
   //Show details of pokemon in the console and modal
   function showDetails(pokemon) {
-    loadDetails(pokemon).then(function () {
-      console.log(pokemon);
-      showModal(pokemon.name, "height: " + pokemon.height, pokemon.imageUrl)
-    });
+    let abilities = [];
+    let types = [];
 
+    loadDetails(pokemon).then(function () {
+      pokemon.abilities.forEach(function (object) {
+        abilities.push(" " + object.ability.name);
+      }),
+        pokemon.types.forEach(function (object) {
+          types.push(" " + object.type.name);
+        }),
+        // console.log(pokemon);
+        showModal(
+          pokemon.name[0].toUpperCase() + pokemon.name.slice(1),
+          pokemon.height,
+          pokemon.weight,
+          abilities,
+          types,
+          pokemon.imageUrl
+        );
+      console.log(pokemon);
+      console.log(types);
+    });
   }
   //Loads list of Pokemon
   function loadList() {
@@ -97,7 +84,7 @@ let pokemonRepository = (function () {
             detailsUrl: item.url,
           };
           add(pokemon);
-          console.log(pokemon)
+          // console.log(pokemon);
         });
       })
       .catch(function (e) {
@@ -105,18 +92,23 @@ let pokemonRepository = (function () {
       });
   }
 
-  //retrives the object informationfor the modal
+  //retrives the object information for the modal
   function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url).then(function (response) {
-      return response.json();
-    }).then(function (details) {
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.types = details.types;
-    }).catch(function (e) {
-      console.error(e);
-    })
+    return fetch(url)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (details) {
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        item.types = details.types;
+        item.weight = details.weight;
+        item.abilities = details.abilities;
+      })
+      .catch(function (e) {
+        console.error(e);
+      });
   }
 
   //outputs each of the following inner functions
@@ -136,29 +128,39 @@ pokemonRepository.loadList().then(function () {
   });
 });
 
-
 // //modal code - //
 
 // //Will open the modal when button is clicked
-function showModal(name, height, image) {
-
+function showModal(name, height, weight, abilities, types, image) {
   //Changes the boostrap modal title text to the pokemons name
-  let pokemonNameElement = document.querySelector('.modal-title');
+  let pokemonNameElement = document.querySelector(".modal-title");
   pokemonNameElement.innerText = name;
 
-  //Changes the bootsrap modal p elements text to height from api
-  let heightElement = document.querySelector('.pokemon-height');
+  // Changes the bootstrap modal height paragraph elements text to height from api
+  let heightElement = document.querySelector(".pokemon-height");
   heightElement.innerText = height;
 
-  //pokemon image
-  let imageElement = document.createElement('img');
-  imageElement.setAttribute('src', image);
-  imageElement.setAttribute('alt', 'Image of pokemon');
-  imageElement.setAttribute('width', '150');
-  imageElement.setAttribute('height', '150');
-  imageElement.setAttribute('class', 'pokemon-image');
+  // Changes the bootstrap modal weight paragraph elements text to weight from api
+  let weightElement = document.querySelector(".pokemon-weight");
+  weightElement.innerText = weight;
 
-  let modalFooter = document.querySelector('.modal-footer');
+  // Changes the bootstrap modal abilities paragraph elements text to abilties from api
+  let abilitiesElement = document.querySelector(".pokemon-abilities");
+  abilitiesElement.innerText = abilities;
+
+  // Changes the bootstrap modal types paragraph elements text to types from api
+  let typesElement = document.querySelector(".pokemon-types");
+  typesElement.innerText = types;
+
+  //pokemon image
+  let imageElement = document.createElement("img");
+  imageElement.setAttribute("src", image);
+  imageElement.setAttribute("alt", "Image of pokemon");
+  imageElement.setAttribute("width", "150");
+  imageElement.setAttribute("height", "150");
+  imageElement.setAttribute("class", "pokemon-image");
+
+  let modalFooter = document.querySelector(".modal-footer");
 
   //prevents multiple images being applied to the modal
   while (modalFooter.firstChild) {
@@ -166,29 +168,4 @@ function showModal(name, height, image) {
   }
 
   modalFooter.appendChild(imageElement);
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
