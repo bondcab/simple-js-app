@@ -10,7 +10,7 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./dist/styles-min.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body class="body-style">
     <!-- bootstrap nav bar html below -->
@@ -26,41 +26,81 @@
           />
           Pokemon
         </a>
+
+        <!-- <form class="d-flex searchForm" role="search">
+          <input
+            class="form-control me-2 searchInput"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
       </div>
     </nav>
-    <h1 class="heading">Pokedex</h1>
-    <div>
-      <!-- two classes added below, first from stylesheet, second from bootstrap -->
-      <ul class="pokemon-list list-group"></ul>
-    </div>
+    <!-- <h1 class="heading">Pokedex</h1> -->
+    <div class="containerBody">
+      <div class="inputAlert" hidden>
+        <h3 class="alertMessage">
+          Could not find Pokemon. Please check spelling
+        </h3>
+      </div>
+      <div class="sloganContainer">
+        <img src="./images/pokemon_02.png" alt="slogan" class="slogan" />
+      </div>
 
-    <!-- below modal from bootstrap -->
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
+      <div>
+        <div class="listTop"></div>
+        <!-- two classes added below, first from stylesheet, second from bootstrap -->
+        <ul class="pokemon-list list-group"></ul>
+      </div>
+      <div class="ashImageContainer">
+        <img src="./images/pokemon_01.png" alt="ash" class="ash" />
+      </div>
+
+      <!-- below modal from bootstrap -->
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body modalContainer">
+              <div class="heightStats">
+                <p class="bold">Height:</p>
+                <p class="pokemon-height"></p>
+              </div>
+              <div class="weightStats">
+                <p class="bold">Weight:</p>
+                <p class="pokemon-weight"></p>
+              </div>
+              <div class="abilitiesStats">
+                <p class="bold">Abilities:</p>
+                <p class="pokemon-abilities"></p>
+              </div>
+              <div class="typesStats">
+                <p class="bold">Types:</p>
+                <p class="pokemon-types"></p>
+              </div>
+            </div>
+            <div class="modal-footer"></div>
           </div>
-          <div class="modal-body">
-            <p class="pokemon-height"></p>
-          </div>
-          <div class="modal-footer"></div>
         </div>
       </div>
     </div>
@@ -79,8 +119,9 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script src="./js/promise-polyfill.js"></script>
+    <!-- <script src="./js/promise-polyfill.js"></script>
     <script src="./js/fetch-polyfill.js"></script>
-    <script src="./dist/scripts-min.js"></script>
+    <script src="./dist/scripts-min.js"></script> -->
+    <script src="./js/scripts.js"></script>
   </body>
 </html>
